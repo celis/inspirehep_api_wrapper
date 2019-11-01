@@ -5,6 +5,7 @@ from typing import Dict, Any
 
 class JobsResponse:
     """
+    Contains the response from the job endpoint
     """
 
     def __init__(self, api_jobs_response: Response):
@@ -14,5 +15,5 @@ class JobsResponse:
     def data(self) -> Dict[str, Any]:
         return self.api_jobs_response.json()
 
-    def to_record(self):
+    def to_record(self) -> JobsRecord:
         return JobsRecord(self.data)

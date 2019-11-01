@@ -6,7 +6,12 @@ from inspirehep_api_wrapper.datamodel.jobs_response import JobsResponse
 
 class InspireAPI:
     """
-    Wrapper around the inspire api
+    Simple wrapper around the inspire api
+
+    methods:
+       literature: gives access to the literature endpoint
+       authors: gives access to the authors endpoint
+       jobs: gives access to the jobs endpoint
     """
 
     LITERATURE = "https://labs.inspirehep.net/api/literature/"
@@ -18,22 +23,21 @@ class InspireAPI:
 
     def literature(self, record_id: str) -> LiteratureResponse:
         """
-        :param record_id:
-        :return:
+        Returns api response for a given record_id
         """
         url = self.LITERATURE + record_id
         return LiteratureResponse(requests.get(url))
 
     def authors(self, author_id: str) -> AuthorsResponse:
         """
-        :return:
+        Returns api response for a given author_id
         """
         url = self.AUTHORS + author_id
         return AuthorsResponse(requests.get(url))
 
     def jobs(self, job_id: str) -> JobsResponse:
         """
-        :return:
+        Returns api response for a given job_id
         """
         url = self.JOBS + job_id
         return JobsResponse(requests.get(url))

@@ -5,6 +5,7 @@ from typing import Dict, Any
 
 class AuthorsResponse:
     """
+    Contains the response from the authors endpoint
     """
 
     def __init__(self, api_authors_response: Response):
@@ -14,5 +15,5 @@ class AuthorsResponse:
     def data(self) -> Dict[str, Any]:
         return self.api_authors_response.json()
 
-    def to_record(self):
+    def to_record(self) -> AuthorsRecord:
         return AuthorsRecord(self.data)
