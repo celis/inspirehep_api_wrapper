@@ -32,7 +32,7 @@ class LiteratureRecord:
             return [author.get("full_name") for author in self.metadata["authors"]]
 
     @property
-    def doi(self):
+    def doi(self) -> str:
         """
         Returns the article DOI code
         """
