@@ -52,18 +52,22 @@ class LiteratureRecord:
             }
 
     @property
+    def title(self) -> str:
+        """
+        Returns title as it appears on inspire
+        """
+        if "titles" in self.metadata:
+            return self.metadata["titles"][0].get("title")
+
+    @property
     def journal(self) -> Dict[str, Any]:
         """
         returns journal information
         """
         if "publication_info" in self.metadata:
             return {
-                "title": self.metadata["publication_info"][0].get(
-                    "journal_title"
-                ),
-                "volume": self.metadata["publication_info"][0].get(
-                    "journal_volume"
-                ),
+                "title": self.metadata["publication_info"][0].get("journal_title"),
+                "volume": self.metadata["publication_info"][0].get("journal_volume"),
                 "page_start": self.metadata["publication_info"][0].get("page_start"),
                 "year": self.metadata["publication_info"][0].get("year"),
             }
