@@ -1,4 +1,4 @@
-from typing import Dict, Any, List
+from typing import Any, List, Dict
 
 
 class LiteratureRecord:
@@ -14,6 +14,7 @@ class LiteratureRecord:
         if "metadata" in self.data:
             return self.data["metadata"]
 
+    @property
     def references(self) -> List[str]:
         if self.metadata and self.metadata.get("references"):
             return [
@@ -21,3 +22,48 @@ class LiteratureRecord:
                 for element in self.metadata["references"]
                 if element.get("record")
             ]
+
+    @property
+    def authors(self) -> List[str]:
+        """
+        returns the article authors.
+        """
+        if "authors" in self.metadata:
+            return [author.get("full_name") for author in self.metadata["authors"]]
+
+    @property
+    def doi(self):
+        """
+        Returns the article DOI code
+        """
+        if "dois" in self.metadata:
+            return self.metadata["dois"][0].get("value")
+
+    @property
+    def arxiv(self) -> Dict[str, str]:
+        """
+        returns the article data
+        """
+        if "arxiv_eprints" in self.metadata:
+            return {
+                "eprint": self.metadata["arxiv_eprints"][0].get("value"),
+                "url": "https://arxiv.org/abs/"
+                + self.metadata["arxiv_eprints"][0].get("value"),
+            }
+
+    @property
+    def journal(self) -> Dict[str, Any]:
+        """
+        returns journal information
+        """
+        if "publication_info" in self.metadata:
+            return {
+                "title": self.metadata["publication_info"][0].get(
+                    "journal_title"
+                ),
+                "volume": self.metadata["publication_info"][0].get(
+                    "journal_volume"
+                ),
+                "page_start": self.metadata["publication_info"][0].get("page_start"),
+                "year": self.metadata["publication_info"][0].get("year"),
+            }
