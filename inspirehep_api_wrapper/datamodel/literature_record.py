@@ -37,7 +37,7 @@ class LiteratureRecord:
         Returns date of the preprint
         """
         if "preprint_date" in self.metadata:
-            return f"({self.metadata['preprint_date']})"
+            return self.metadata['preprint_date']
 
     @property
     def authors(self) -> List[str]:
