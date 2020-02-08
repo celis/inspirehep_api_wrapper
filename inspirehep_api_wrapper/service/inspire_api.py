@@ -6,7 +6,9 @@ from inspirehep_api_wrapper.datamodel.jobs_response import JobsResponse
 
 class InspireAPI:
     """
-    Simple wrapper around the inspire api
+    Simple wrapper around the INSPIRE API
+
+    https://labs.inspirehep.net
 
     methods:
        literature: gives access to the literature endpoint

@@ -3,7 +3,8 @@ from typing import Any, List, Dict
 
 class LiteratureRecord:
     """
-    Datamodel class for handling a literature record data
+    Datamodel class for handling literature record data,
+    implementing basic methods to access the properties
     """
 
     def __init__(self, data: Dict[str, Any]):
@@ -11,11 +12,18 @@ class LiteratureRecord:
 
     @property
     def metadata(self) -> Dict[str, Any]:
+        """
+        Returns raw metadata provided by INSPIRE as a Dict
+        """
         if "metadata" in self.data:
             return self.data["metadata"]
 
     @property
     def references(self) -> List[str]:
+        """
+        Returns reference list of the article as a List of INSPIRE article ids,
+        ordered in the order of appearance.
+        """
         if self.metadata and self.metadata.get("references"):
             return [
                 element["record"]["$ref"].split("/")[-1]
@@ -24,9 +32,17 @@ class LiteratureRecord:
             ]
 
     @property
+    def preprint_date(self) -> str:
+        """
+        Returns date of the preprint
+        """
+        if "preprint_date" in self.metadata:
+            return f"({self.metadata['preprint_date']})"
+
+    @property
     def authors(self) -> List[str]:
         """
-        returns the article authors.
+        Returns the article authors.
         """
         if "authors" in self.metadata:
             return [author.get("full_name") for author in self.metadata["authors"]]
@@ -42,7 +58,7 @@ class LiteratureRecord:
     @property
     def arxiv(self) -> Dict[str, str]:
         """
-        returns the article data
+        Returns the article arXiv data (eprint number and url)
         """
         if "arxiv_eprints" in self.metadata:
             return {
@@ -54,7 +70,8 @@ class LiteratureRecord:
     @property
     def title(self) -> str:
         """
-        Returns title as it appears on inspire
+        Returns title as it appears on INSPIRE
+        (some articles title differ when published on a journal compared to the preprint)
         """
         if "titles" in self.metadata:
             return self.metadata["titles"][0].get("title")
@@ -62,7 +79,7 @@ class LiteratureRecord:
     @property
     def journal(self) -> Dict[str, Any]:
         """
-        returns journal information
+        Returns journal information about the article
         """
         if "publication_info" in self.metadata:
             return {

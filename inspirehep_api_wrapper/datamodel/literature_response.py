@@ -13,7 +13,13 @@ class LiteratureResponse:
 
     @property
     def data(self) -> Dict[str, Any]:
+        """
+        Raw data obtained from INSPIRE
+        """
         return self.api_literature_response.json()
 
     def to_record(self) -> LiteratureRecord:
+        """
+        Return a LiteratureRecord object
+        """
         return LiteratureRecord(self.data)

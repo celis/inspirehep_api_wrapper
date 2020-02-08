@@ -11,5 +11,8 @@ class AuthorsRecord:
 
     @property
     def metadata(self) -> Dict[str, any]:
+        """
+        Returns raw metadata provided by INSPIRE as a Dict
+        """
         if "metadata" in self.data:
             return self.data["metadata"]

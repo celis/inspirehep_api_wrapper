@@ -13,7 +13,13 @@ class JobsResponse:
 
     @property
     def data(self) -> Dict[str, Any]:
+        """
+        Raw data obtained from INSPIRE
+        """
         return self.api_jobs_response.json()
 
     def to_record(self) -> JobsRecord:
+        """
+        Return a JobsRecord object
+        """
         return JobsRecord(self.data)
