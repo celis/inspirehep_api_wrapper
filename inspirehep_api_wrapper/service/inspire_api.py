@@ -2,6 +2,7 @@ import requests
 from inspirehep_api_wrapper.datamodel.literature_response import LiteratureResponse
 from inspirehep_api_wrapper.datamodel.authors_response import AuthorsResponse
 from inspirehep_api_wrapper.datamodel.jobs_response import JobsResponse
+from inspirehep_api_wrapper.datamodel.conferences_response import ConferencesResponse
 
 
 class InspireAPI:
@@ -14,11 +15,13 @@ class InspireAPI:
        literature: gives access to the literature endpoint
        authors: gives access to the authors endpoint
        jobs: gives access to the jobs endpoint
+       conferences: access to conferences endpoint
     """
 
     LITERATURE = "https://labs.inspirehep.net/api/literature/"
     AUTHORS = "https://labs.inspirehep.net/api/authors/"
     JOBS = "https://labs.inspirehep.net/api/jobs/"
+    CONFERENCES = "https://labs.inspirehep.net/api/conferences/"
 
     def __init__(self):
         pass
@@ -43,3 +46,10 @@ class InspireAPI:
         """
         url = self.JOBS + job_id
         return JobsResponse(requests.get(url))
+
+    def conferences(self, conference_id: str) -> ConferencesResponse:
+        """
+        Returns api response for a given conference_id
+        """
+        url = self.CONFERENCES + conference_id
+        return ConferencesResponse(requests.get(url))

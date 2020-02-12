@@ -5,6 +5,7 @@ This project provides a simple wrapper around the Inspire HEP API, https://labs.
  - literature 
  - authors
  - jobs
+ - conferences
  
  ### Dependencies
  
