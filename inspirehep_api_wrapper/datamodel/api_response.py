@@ -4,7 +4,7 @@ from requests import Response
 
 class ApiResponse:
     """
-    Base class for classes handling the API response
+    Class handling the API response
     """
 
     def __init__(self, response: Response):
