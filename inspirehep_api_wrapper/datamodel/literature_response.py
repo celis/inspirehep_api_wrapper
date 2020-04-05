@@ -1,25 +1,11 @@
 from requests import Response
-from inspirehep_api_wrapper.datamodel.literature_record import LiteratureRecord
-from typing import Dict, Any
+from .api_response import ApiResponse
 
 
-class LiteratureResponse:
+class LiteratureResponse(ApiResponse):
     """
     Contains the response from the literature endpoint
     """
 
-    def __init__(self, api_literature_response: Response):
-        self.api_literature_response = api_literature_response
-
-    @property
-    def data(self) -> Dict[str, Any]:
-        """
-        Raw data obtained from INSPIRE
-        """
-        return self.api_literature_response.json()
-
-    def to_record(self) -> LiteratureRecord:
-        """
-        Return a LiteratureRecord object
-        """
-        return LiteratureRecord(self.data)
+    def __init__(self, response: Response):
+        super().__init__(response)
