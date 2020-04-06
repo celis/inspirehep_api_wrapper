@@ -27,16 +27,17 @@ class InspireAPI:
     def __init__(self):
         self.endpoints = [self.LITERATURE, self.AUTHORS, self.JOBS, self.CONFERENCES]
 
-    def search(self, endpoint: str, query: str, params: Dict) -> ApiResponse:
+    def search(self, endpoint: str, query: str, params: Dict = None) -> SearchAPIResponse:
         """
         search query
 
         :param endpoint:
-        :param query:
+        :param q:
         :return:
         """
         parameters = {"q": query}
-        parameters.update(params)
+        if params:
+            parameters.update(params)
         url = join(self.API, endpoint)
         return SearchAPIResponse(requests.get(url, parameters))
 
